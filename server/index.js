@@ -23,7 +23,11 @@ app.use(express.json());
 app.use(cookieParser());
 app.use(
 	cors({
-	  origin: ["http://localhost:3000", "https://studynotion-edtech-five.vercel.app"],
+	  origin: [
+		"http://localhost:3000",
+		"https://studynotion-edtech-five.vercel.app", // ✅ your older Vercel domain
+		"https://studynotion-edtech-9wn4cbhai-2shubhs-projects.vercel.app", // ✅ new Vercel preview domain
+	  ],
 	  credentials: true,
 	})
   );
