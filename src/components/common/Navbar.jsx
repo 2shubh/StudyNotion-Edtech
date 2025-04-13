@@ -19,6 +19,7 @@ function Navbar() {
 
   const [subLinks, setSubLinks] = useState([])
   const [loading, setLoading] = useState(false)
+  const [isMenuOpen, setIsMenuOpen] = useState(false) // State to control the mobile menu visibility
 
   useEffect(() => {
     ;(async () => {
@@ -26,6 +27,7 @@ function Navbar() {
       try {
         const res = await apiConnector("GET", categories.CATEGORIES_API)
         setSubLinks(res.data.data)
+        console.log("Fetched Categories", res.data.data);
       } catch (error) {
         console.log("Could not fetch Categories.", error)
       }
@@ -33,10 +35,12 @@ function Navbar() {
     })()
   }, [])
 
-  // console.log("sub links", subLinks)
-
   const matchRoute = (route) => {
     return matchPath({ path: route }, location.pathname)
+  }
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen) // Toggle the menu visibility
   }
 
   return (
@@ -78,14 +82,14 @@ function Navbar() {
                               )
                               ?.map((subLink, i) => (
                                 <Link
-                                  to={`/catalog/${subLink?.name
+                                  to={`/catalog/${subLink?.Name
                                     ?.split(" ")
                                     .join("-")
                                     .toLowerCase()}`}
                                   className="rounded-lg bg-transparent py-4 pl-4 hover:bg-richblack-50"
                                   key={i}
                                 >
-                                  <p>{subLink.name}</p>
+                                  <p>{subLink.Name}</p>
                                 </Link>
                               ))}
                           </>
@@ -112,6 +116,7 @@ function Navbar() {
             ))}
           </ul>
         </nav>
+
         {/* Login / Signup / Dashboard */}
         <div className="hidden items-center gap-x-4 md:flex">
           {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
@@ -140,10 +145,56 @@ function Navbar() {
           )}
           {token !== null && <ProfileDropdown />}
         </div>
-        <button className="mr-4 md:hidden">
+
+        {/* Mobile hamburger icon */}
+        <button className="mr-4 md:hidden" onClick={toggleMenu}>
           <AiOutlineMenu fontSize={24} fill="#AFB2BF" />
         </button>
       </div>
+
+      {/* Mobile menu */}
+      {isMenuOpen && (
+        <div className="md:hidden absolute left-0 top-14 z-50 w-full bg-richblack-800 text-white">
+          <ul className="flex flex-col gap-y-4 p-4">
+            {NavbarLinks.map((link, index) => (
+              <li key={index}>
+                <Link to={link?.path} className="p-2">
+                  <p>{link.title}</p>
+                </Link>
+              </li>
+            ))}
+            <div className="mt-4">
+              {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
+                <Link to="/dashboard/cart" className="relative">
+                  <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
+                  {totalItems > 0 && (
+                    <span className="absolute -bottom-2 -right-2 grid h-5 w-5 place-items-center overflow-hidden rounded-full bg-richblack-600 text-center text-xs font-bold text-yellow-100">
+                      {totalItems}
+                    </span>
+                  )}
+                </Link>
+              )}
+            </div>
+            <div className="mt-4">
+              {token === null && (
+                <Link to="/login">
+                  <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
+                    Log in
+                  </button>
+                </Link>
+              )}
+              {token === null && (
+                <Link to="/signup">
+                  <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
+                    Sign up
+                  </button>
+                </Link>
+              )}
+              {token !== null && <ProfileDropdown />}
+            </div>
+          </ul>
+        </div>
+      )}
     </div>
   )
 }

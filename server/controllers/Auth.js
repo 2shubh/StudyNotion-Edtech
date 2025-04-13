@@ -219,6 +219,14 @@ exports.sendotp = async (req, res) => {
     }
     const otpPayload = { email, otp }
     const otpBody = await OTP.create(otpPayload)
+
+    await mailSender(
+      email,
+      "StudyNotion - OTP Verification",
+      `<p>Your OTP for email verification is <strong>${otp}</strong>.</p>`
+    ); 
+
+    
     console.log("OTP Body", otpBody)
     res.status(200).json({
       success: true,

@@ -229,17 +229,20 @@ export default function CourseInformationForm() {
           {...register("courseCategory", { required: true })}
           defaultValue=""
           id="courseCategory"
-          className="form-style w-full"
+          className="form-style w-full  "
         >
           <option value="" disabled>
             Choose a Category
           </option>
+         
+
           {!loading &&
             courseCategories?.map((category, indx) => (
               <option key={indx} value={category?._id}>
                 {category?.name}
               </option>
             ))}
+          
         </select>
         {errors.courseCategory && (
           <span className="ml-2 text-xs tracking-wide text-pink-200">

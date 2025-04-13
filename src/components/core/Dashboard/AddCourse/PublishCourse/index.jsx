@@ -7,6 +7,7 @@ import { editCourseDetails } from "../../../../../services/operations/courseDeta
 import { resetCourseState, setStep } from "../../../../../slices/courseSlice"
 import { COURSE_STATUS } from "../../../../../utils/constants"
 import IconBtn from "../../../../common/IconBtn"
+import toast from "react-hot-toast"
 
 export default function PublishCourse() {
   const { register, handleSubmit, setValue, getValues } = useForm()
@@ -51,10 +52,16 @@ export default function PublishCourse() {
       : COURSE_STATUS.DRAFT
     formData.append("status", courseStatus)
     setLoading(true)
+    try {
     const result = await editCourseDetails(formData, token)
     if (result) {
       goToCourses()
     }
+  }
+  catch(error){
+    console.error("Error while publishing course", error);
+    toast.error("Failed to publish the course.");
+  }
     setLoading(false)
   }
 

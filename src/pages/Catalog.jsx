@@ -21,9 +21,19 @@ const Catalog = () => {
     useEffect(()=> {
         const getCategories = async() => {
             const res = await apiConnector("GET", categories.CATEGORIES_API);
-            const category_id = 
-            res?.data?.data?.filter((ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName)[0]._id;
-            setCategoryId(category_id);
+            // const category_id = 
+            // res?.data?.data?.filter((ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName)[0]._id;
+
+            // setCategoryId(category_id);
+            const categoryItem = res?.data?.data?.find(
+              (ct) => ct.Name.split(" ").join("-").toLowerCase() === catalogName
+            );
+            
+            if (categoryItem?._id) {
+              setCategoryId(categoryItem._id);
+            } else {
+              console.log("Category not found for:", catalogName);
+            }
         }
         getCategories();
     },[catalogName]);
