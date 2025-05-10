@@ -19,13 +19,13 @@ export default function MyProfile() {
           <img
             src={user?.image}
             alt={`profile-${user?.firstName}`}
-            className="aspect-square w-[78px] rounded-full object-cover"
+            className="aspect-square w-[50px] rounded-full object-cover"
           />
           <div className="space-y-1">
             <p className="text-lg font-semibold text-richblack-5">
               {user?.firstName + " " + user?.lastName}
             </p>
-            <p className="text-sm text-richblack-300">{user?.email}</p>
+            <p className="text-xs text-richblack-300">{user?.email}</p>
           </div>
         </div>
         <IconBtn
