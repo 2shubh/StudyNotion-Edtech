@@ -67,6 +67,11 @@ export const contactusEndpoint = {
   CONTACT_US_API: BASE_URL + "/reach/contact",
 }
 
+// //CHAtBOT APIS
+export const chatbotEndpoints={
+  CHATBOT_API: BASE_URL + "/chatbot",
+}
+
 // SETTINGS PAGE API
 export const settingsEndpoints = {
   UPDATE_DISPLAY_PICTURE_API: BASE_URL + "/profile/updateDisplayPicture",

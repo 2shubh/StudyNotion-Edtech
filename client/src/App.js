@@ -28,6 +28,7 @@ import CourseDetails from "./pages/CourseDetails";
 import ViewCourse from "./pages/ViewCourse";
 import VideoDetails from "./components/core/ViewCourse/VideoDetails";
 import Instructor from "./components/core/Dashboard/InstructorDashboard/Instructor";
+import Chatbot from "./components/chatbot/chatbot";
 
 function App() {
 
@@ -40,6 +41,7 @@ function App() {
   return (
    <div className="w-screen min-h-screen bg-richblack-900 flex flex-col font-inter">
     <Navbar/>
+    <Chatbot/>
     <Routes>
       <Route path="/" element={<Home/>} />
       <Route path="/catalog/:catalogName" element={<Catalog/>} />
@@ -156,6 +158,7 @@ function App() {
       </Route>
 
 
+      
 
     <Route path="*" element={<Error />} />
 

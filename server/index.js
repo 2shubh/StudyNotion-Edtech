@@ -12,6 +12,7 @@ const cors = require("cors");
 const {cloudinaryConnect } = require("./config/cloudinary");
 const fileUpload = require("express-fileupload");
 const dotenv = require("dotenv");
+const chatbotRoutes=require("./routes/chatbotRoute")
 
 dotenv.config();
 const PORT = process.env.PORT || 4000;
@@ -47,6 +48,7 @@ app.use("/api/v1/profile", profileRoutes);
 app.use("/api/v1/course", courseRoutes);
 app.use("/api/v1/payment", paymentRoutes);
 app.use("/api/v1/reach", contactUsRoute);
+app.use("/api/v1/chatbot",chatbotRoutes);
 
 //def route
 
