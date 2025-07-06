@@ -15,19 +15,35 @@ export default function MyProfile() {
         My Profile
       </h1>
       <div className="flex items-center justify-between rounded-md border-[1px] border-richblack-700 bg-richblack-800 p-8 px-12">
-        <div className="flex items-center gap-x-4">
-          <img
-            src={user?.image}
-            alt={`profile-${user?.firstName}`}
-            className="aspect-square w-[50px] rounded-full object-cover"
-          />
-          <div className="space-y-1">
-            <p className="text-lg font-semibold text-richblack-5">
-              {user?.firstName + " " + user?.lastName}
-            </p>
-            <p className="text-xs text-richblack-300">{user?.email}</p>
-          </div>
-        </div>
+       <div className="flex items-center gap-x-4">
+  {user?.image && user.image.trim() !== "" ? (
+    <img
+      src={user.image}
+      alt={`profile-${user?.firstName}`}
+      className="aspect-square w-[50px] rounded-full object-cover"
+      onError={(e) => {
+        e.target.onerror = null;
+        e.target.style.display = "none"; // Hide broken image
+        e.target.parentNode.querySelector(".fallback-avatar").style.display = "flex";
+      }}
+    />
+  ) : null}
+
+  {/* Fallback initials avatar, hidden by default unless image fails */}
+  <div
+    className="fallback-avatar hidden aspect-square w-[50px] items-center justify-center rounded-full bg-yellow-500 text-sm font-bold text-white uppercase"
+  >
+    {`${user?.firstName?.[0] || ""}${user?.lastName?.[0] || ""}`}
+  </div>
+
+  <div className="space-y-1">
+    <p className="text-lg font-semibold text-richblack-5">
+      {user?.firstName + " " + user?.lastName}
+    </p>
+    <p className="text-xs text-richblack-300">{user?.email}</p>
+  </div>
+</div>
+
         <IconBtn
           text="Edit"
           onclick={() => {

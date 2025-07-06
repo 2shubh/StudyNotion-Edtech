@@ -21,11 +21,25 @@ export default function ProfileDropdown() {
   return (
     <button className="relative" onClick={() => setOpen(true)}>
       <div className="flex items-center gap-x-1">
-        <img
-          src={user?.image}
-          alt={`profile-${user?.firstName}`}
-          className="aspect-square w-[30px] rounded-full object-cover"
-        />
+      {user?.image?.trim() ? (
+  <img
+    src={user.image}
+    alt="profile"
+    className="w-[30px] h-[30px] rounded-full object-cover"
+    onError={(e) => {
+      e.target.onerror = null
+      e.target.style.display = "none"
+      e.target.parentNode.querySelector(".fallback-avatar").style.display = "flex"
+    }}
+  />
+) : null}
+
+<div
+  className="fallback-avatar hidden w-[30px] h-[30px] items-center justify-center rounded-full bg-yellow-500 text-sm font-bold text-white uppercase"
+>
+  {`${user?.firstName?.[0] || ""}${user?.lastName?.[0] || ""}`}
+</div>
+
         <AiOutlineCaretDown className="text-sm text-richblack-100" />
       </div>
       {open && (
