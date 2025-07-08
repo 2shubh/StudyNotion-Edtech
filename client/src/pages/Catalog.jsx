@@ -17,16 +17,26 @@ const Catalog = () => {
     const [catalogPageData, setCatalogPageData] = useState(null);
     const [categoryId, setCategoryId] = useState("");
 
+    // logs for Debug
+    console.log("Params:", catalogName);
+
+
     //Fetch all categories
     useEffect(()=> {
+       
         const getCategories = async() => {
             const res = await apiConnector("GET", categories.CATEGORIES_API);
+
+        // logs to debug
+        
+console.log("Categories API response:", res?.data?.data);
+
             // const category_id = 
             // res?.data?.data?.filter((ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName)[0]._id;
 
             // setCategoryId(category_id);
             const categoryItem = res?.data?.data?.find(
-              (ct) => ct.Name.split(" ").join("-").toLowerCase() === catalogName
+              (ct) => ct.name.split(" ").join("-").toLowerCase() === catalogName
             );
             
             if (categoryItem?._id) {
@@ -36,7 +46,13 @@ const Catalog = () => {
             }
         }
         getCategories();
+        
+        console.log("Categories is:", getCategories);
     },[catalogName]);
+
+    // logs debug 
+    
+
 
     useEffect(() => {
         const getCategoryDetails = async() => {
