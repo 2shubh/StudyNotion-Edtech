@@ -115,6 +115,11 @@ exports.createCourse = async (req, res) => {
       { new: true }
     )
     console.log("HEREEEEEEEE", categoryDetails2)
+
+    if (!categoryDetails2) {
+  console.log("Category update failed. Check category ID:", category);
+}
+
     // Return the new course and a success message
     res.status(200).json({
       success: true,
@@ -304,7 +309,16 @@ exports.getCourseDetails = async (req, res) => {
       })
       .exec()
 
+      // logs
+      // Temporarily log this inside your getCourseDetails controller
+console.log("Instructor Details:", courseDetails.instructor);
+console.log("Instructor Additional Details:", courseDetails.instructor?.additionalDetails);
+
+
+        console.log("Populated Instructor: ", courseDetails.instructor);
+
     if (!courseDetails) {
+      console.log(" Instructor is NULL for course:", courseId);
       return res.status(400).json({
         success: false,
         message: `Could not find course with id: ${courseId}`,

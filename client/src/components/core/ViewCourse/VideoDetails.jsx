@@ -162,6 +162,14 @@ const VideoDetails = () => {
       { courseId: courseId, subsectionId: subSectionId },
       token
     )
+
+    //logs
+
+    console.log("Calling markLectureAsComplete with: ", {
+  courseId: courseId,
+  subsectionId: subSectionId
+});
+
     if (res) {
       dispatch(updateCompletedLectures(subSectionId))
     }
