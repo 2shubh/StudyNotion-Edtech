@@ -25,7 +25,7 @@ export function sendOtp(email, navigate) {
     // console.log("Body:", { email, checkUserPresent: true });
 
     try {
-      const response = await apiConnector("POST", "/auth/sendotp", {
+      const response = await apiConnector("POST", SENDOTP_API, {
         email,
         checkUserPresent: true,
       });
