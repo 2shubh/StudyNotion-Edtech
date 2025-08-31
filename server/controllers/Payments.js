@@ -58,7 +58,7 @@ exports.capturePayment = async (req, res) => {
   const options = {
     amount: total_amount * 100,
     currency: "INR",
-    receipt: Math.random(Date.now()).toString(),
+    receipt: `receipt_${Date.now()}`,
   }
 
   try {
@@ -93,7 +93,7 @@ exports.verifyPayment = async (req, res) => {
     !courses ||
     !userId
   ) {
-    return res.status(200).json({ success: false, message: "Payment Failed" })
+    return res.status(404).json({ success: false, message: "Payment Failed" })
   }
 
   let body = razorpay_order_id + "|" + razorpay_payment_id
@@ -157,7 +157,7 @@ const enrollStudents = async (courses, userId, res) => {
       // Find the course and enroll the student in it
       const enrolledCourse = await Course.findOneAndUpdate(
         { _id: courseId },
-        { $push: { studentsEnroled: userId } },
+        { $push: { studentsEnrolled: userId } },
         { new: true }
       )
 
