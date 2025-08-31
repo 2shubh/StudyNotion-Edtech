@@ -19,10 +19,10 @@ export function sendOtp(email, navigate) {
     const toastId = toast.loading("Loading...");
     dispatch(setLoading(true));
 
-    console.log("🔹 Sending OTP Request:");
-    console.log("Method: POST");
-    console.log("URL:", SENDOTP_API);
-    console.log("Body:", { email, checkUserPresent: true });
+    // console.log(" Sending OTP Request:");
+    // console.log("Method: POST");
+    // console.log("URL:", SENDOTP_API);
+    // console.log("Body:", { email, checkUserPresent: true });
 
     try {
       const response = await apiConnector("POST", "/auth/sendotp", {
@@ -30,7 +30,7 @@ export function sendOtp(email, navigate) {
         checkUserPresent: true,
       });
 
-      console.log("✅ SENDOTP API RESPONSE:", response);
+      // console.log("SENDOTP API RESPONSE:", response);
 
       if (!response?.data?.success) {
         throw new Error(response?.data?.message || "Unknown error");
@@ -39,7 +39,7 @@ export function sendOtp(email, navigate) {
       toast.success("OTP Sent Successfully");
       navigate("/verify-email");
     } catch (error) {
-      console.error("❌ SENDOTP API ERROR:", error.response || error);
+      // console.error(" SENDOTP API ERROR:", error.response || error);
       toast.error("Could Not Send OTP");
     }
 

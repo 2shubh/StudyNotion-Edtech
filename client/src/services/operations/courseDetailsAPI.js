@@ -396,7 +396,7 @@ export const enrollCourse = async (courseId, token) => {
   try {
     const response = await apiConnector(
       "POST",
-      courseEndpoints.ENROLL_COURSE_API,
+      ENROLL_COURSE_API,
       { courseId },
       {
         Authorization: `Bearer ${token}`,
