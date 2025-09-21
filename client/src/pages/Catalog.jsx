@@ -104,21 +104,21 @@ console.log("Categories API response:", res?.data?.data);
           </div>
     
           {/* Section 1 */}
-          <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+          <div className="mx-auto box-content w-full max-w-maxContentTab px-4 py-8 md:py-12 lg:max-w-maxContent">
             <div className="section_heading">Courses to get you started</div>
-            <div className="my-4 flex border-b border-b-richblack-600 text-sm">
+            <div className="my-4 flex border-b border-b-richblack-600 text-sm overflow-x-auto">
               <p
-                className={`px-4 py-2 ${
+                className={`px-4 py-2 whitespace-nowrap ${
                   active === 1
                     ? "border-b border-b-yellow-25 text-yellow-25"
                     : "text-richblack-50"
                 } cursor-pointer`}
                 onClick={() => setActive(1)}
               >
-                Most Populer
+                Most Popular
               </p>
               <p
-                className={`px-4 py-2 ${
+                className={`px-4 py-2 whitespace-nowrap ${
                   active === 2
                     ? "border-b border-b-yellow-25 text-yellow-25"
                     : "text-richblack-50"
@@ -135,11 +135,11 @@ console.log("Categories API response:", res?.data?.data);
             </div>
           </div>
           {/* Section 2 */}
-          <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+          <div className="mx-auto box-content w-full max-w-maxContentTab px-4 py-8 md:py-12 lg:max-w-maxContent">
             <div className="section_heading">
               Top courses in {catalogPageData?.data?.differentCategory?.name}
             </div>
-            <div className="py-8">
+            <div className="py-6 md:py-8">
               <CourseSlider
                 Courses={catalogPageData?.data?.differentCategory?.courses}
               />
@@ -147,14 +147,14 @@ console.log("Categories API response:", res?.data?.data);
           </div>
     
           {/* Section 3 */}
-          <div className=" mx-auto box-content w-full max-w-maxContentTab px-4 py-12 lg:max-w-maxContent">
+          <div className="mx-auto box-content w-full max-w-maxContentTab px-4 py-8 md:py-12 lg:max-w-maxContent">
             <div className="section_heading">Frequently Bought</div>
-            <div className="py-8">
-              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+            <div className="py-6 md:py-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 xl:grid-cols-3 gap-4 md:gap-6">
                 {catalogPageData?.data?.mostSellingCourses
-                  ?.slice(0, 4)
+                  ?.slice(0, 6)
                   .map((course, i) => (
-                    <Course_Card course={course} key={i} Height={"h-[400px]"} />
+                    <Course_Card course={course} key={i} Height={"h-[250px] md:h-[300px] lg:h-[400px]"} />
                   ))}
               </div>
             </div>

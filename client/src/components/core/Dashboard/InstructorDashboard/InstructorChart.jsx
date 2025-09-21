@@ -50,10 +50,10 @@ export default function InstructorChart({ courses }) {
   };
 
   return (
-    <div className="flex flex-col gap-4 rounded-md bg-richblack-800 p-6 w-full h-full">
+    <div className="flex flex-col gap-4 rounded-md bg-richblack-800 p-4 md:p-6 w-full h-full">
       <p className="text-lg font-bold text-richblack-5">Visualize</p>
 
-      <div className="space-x-4 font-semibold">
+      <div className="flex flex-col sm:flex-row sm:space-x-4 space-y-2 sm:space-y-0 font-semibold">
         <button
           onClick={() => setCurrChart("students")}
           className={`rounded-sm p-1 px-3 transition-all duration-200 ${
@@ -77,7 +77,7 @@ export default function InstructorChart({ courses }) {
       </div>
 
       {/* Chart container */}
-      <div className="flex-1 relative w-full">
+      <div className="flex-1 relative w-full min-h-[200px] md:min-h-[250px]">
         <Pie
           data={currChart === "students" ? chartDataStudents : chartIncomeData}
           options={options}
