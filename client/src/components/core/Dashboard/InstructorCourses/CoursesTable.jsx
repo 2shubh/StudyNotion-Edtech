@@ -76,13 +76,13 @@ export default function CoursesTable({ courses, setCourses }) {
                   <img
                     src={course?.thumbnail}
                     alt={course?.courseName}
-                    className="h-[148px] w-[220px] rounded-lg object-cover"
+                    className="h-[100px] w-[140px] md:h-[148px] md:w-[220px] rounded-lg object-cover flex-shrink-0"
                   />
-                  <div className="flex flex-col justify-between">
-                    <p className="text-lg font-semibold text-richblack-5">
+                  <div className="flex flex-col justify-between min-w-0 flex-1">
+                    <p className="text-base md:text-lg font-semibold text-richblack-5 line-clamp-2">
                       {course.courseName}
                     </p>
-                    <p className="text-xs text-richblack-300">
+                    <p className="text-xs text-richblack-300 line-clamp-3 md:line-clamp-none">
                       {course.courseDescription.split(" ").length >
                       TRUNCATE_LENGTH
                         ? course.courseDescription
