@@ -37,7 +37,7 @@ function Home() {
         </div>
 
         {/* Sub Heading */}
-        <div className="-mt-3 w-[90%] text-center text-lg font-bold text-richblack-300">
+        <div className="-mt-3 w-[95%] md:w-[90%] text-center text-base md:text-lg font-bold text-richblack-300">
           With our online coding courses, you can learn at your own pace, from
           anywhere in the world, and get access to a wealth of resources,
           including hands-on projects, quizzes, and personalized feedback from
@@ -45,7 +45,7 @@ function Home() {
         </div>
 
         {/* CTA Buttons */}
-        <div className="mt-8 flex flex-row gap-7">
+        <div className="mt-8 flex flex-col sm:flex-row gap-4 sm:gap-7">
           <CTAButton active={true} linkto={"/signup"}>
             Learn More
           </CTAButton>

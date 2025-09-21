@@ -51,7 +51,7 @@ export default function RenderSteps() {
             {item.id !== steps.length && (
               <>
                 <div
-                  className={`h-[calc(34px/2)] w-[33%]  border-dashed border-b-2 ${
+                  className={`h-[calc(34px/2)] w-[20%] sm:w-[33%] border-dashed border-b-2 ${
                   step > item.id  ? "border-yellow-50" : "border-richblack-500"
                 } `}
                 ></div>
@@ -65,12 +65,12 @@ export default function RenderSteps() {
         {steps.map((item) => (
           <>
             <div
-              className="flex min-w-[130px] flex-col items-center gap-y-2"
+              className="flex min-w-[80px] sm:min-w-[130px] flex-col items-center gap-y-2"
               key={item.id}
             >
               
               <p
-                className={`text-sm ${
+                className={`text-xs sm:text-sm ${
                   step >= item.id ? "text-richblack-5" : "text-richblack-500"
                 }`}
               >

@@ -154,43 +154,83 @@ function Navbar() {
 
       {/* Mobile menu */}
       {isMenuOpen && (
-        <div className="md:hidden absolute left-0 top-14 z-50 w-full bg-richblack-800 text-white">
-          <ul className="flex flex-col gap-y-4 p-4">
+        <div className="md:hidden absolute left-0 top-14 z-50 w-full bg-richblack-800 text-white border-t border-richblack-700">
+          <ul className="flex flex-col gap-y-2 p-4">
             {NavbarLinks.map((link, index) => (
               <li key={index}>
-                <Link to={link?.path} className="p-2">
-                  <p>{link.title}</p>
-                </Link>
+                {link.title === "Catalog" ? (
+                  <div className="py-2">
+                    <p className="text-richblack-25">{link.title}</p>
+                    {subLinks && subLinks.length > 0 && (
+                      <div className="ml-4 mt-2 space-y-2">
+                        {subLinks
+                          .filter((subLink) => subLink?.courses?.length > 0)
+                          .map((subLink, i) => (
+                            <Link
+                              key={i}
+                              to={`/catalog/${subLink?.name
+                                ?.split(" ")
+                                .join("-")
+                                .toLowerCase()}`}
+                              className="block py-1 text-sm text-richblack-200 hover:text-yellow-25"
+                              onClick={() => setIsMenuOpen(false)}
+                            >
+                              {subLink.name}
+                            </Link>
+                          ))}
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <Link 
+                    to={link?.path} 
+                    className="block py-2 text-richblack-25 hover:text-yellow-25"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    {link.title}
+                  </Link>
+                )}
               </li>
             ))}
-            <div className="mt-4">
+            
+            {/* Mobile Auth Buttons */}
+            <div className="mt-4 border-t border-richblack-700 pt-4 space-y-3">
               {user && user?.accountType !== ACCOUNT_TYPE.INSTRUCTOR && (
-                <Link to="/dashboard/cart" className="relative">
-                  <AiOutlineShoppingCart className="text-2xl text-richblack-100" />
+                <Link 
+                  to="/dashboard/cart" 
+                  className="flex items-center gap-2 py-2 text-richblack-25"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  <AiOutlineShoppingCart className="text-xl" />
+                  <span>Cart</span>
                   {totalItems > 0 && (
-                    <span className="absolute -bottom-2 -right-2 grid h-5 w-5 place-items-center overflow-hidden rounded-full bg-richblack-600 text-center text-xs font-bold text-yellow-100">
+                    <span className="ml-auto grid h-5 w-5 place-items-center rounded-full bg-richblack-600 text-xs font-bold text-yellow-100">
                       {totalItems}
                     </span>
                   )}
                 </Link>
               )}
-            </div>
-            <div className="mt-4">
+              
               {token === null && (
-                <Link to="/login">
-                  <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
-                    Log in
-                  </button>
-                </Link>
+                <>
+                  <Link to="/login" onClick={() => setIsMenuOpen(false)}>
+                    <button className="w-full rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
+                      Log in
+                    </button>
+                  </Link>
+                  <Link to="/signup" onClick={() => setIsMenuOpen(false)}>
+                    <button className="w-full rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
+                      Sign up
+                    </button>
+                  </Link>
+                </>
               )}
-              {token === null && (
-                <Link to="/signup">
-                  <button className="rounded-[8px] border border-richblack-700 bg-richblack-800 px-[12px] py-[8px] text-richblack-100">
-                    Sign up
-                  </button>
-                </Link>
+              
+              {token !== null && (
+                <div onClick={() => setIsMenuOpen(false)}>
+                  <ProfileDropdown />
+                </div>
               )}
-              {token !== null && <ProfileDropdown />}
             </div>
           </ul>
         </div>
